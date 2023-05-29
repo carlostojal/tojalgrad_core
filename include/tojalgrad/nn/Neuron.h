@@ -23,8 +23,10 @@ namespace tojalgrad {
 
                 std::function<float(float in)> activation = nullptr;
 
+                void initRandomWeights();
+
             public:
-                explicit Neuron(int n_inputs);
+                explicit Neuron(int n_inputs, const std::function<float(float in)>& activation);
 
                 float forward(const Eigen::VectorXf& inputs);
         };
