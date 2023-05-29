@@ -17,6 +17,9 @@ namespace tojalgrad::nn {
 
         float Neuron::forward(const Eigen::VectorXf& inputs) {
 
+            if(inputs.size() != this->w.size())
+                throw std::runtime_error("Mismatched input vector size!");
+
             float out = this->w.dot(inputs) + this->b;
 
             return this->activation(out);
