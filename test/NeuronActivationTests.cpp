@@ -11,18 +11,12 @@ using namespace tojalgrad::nn;
 class NeuronActivationTests : public ::testing::Test {
 
     protected:
-        Neuron linearNeuron;
-        Neuron stepNeuron;
-        Neuron sigmoidNeuron;
-        Neuron reluNeuron;
+        Neuron neuron;
 
         Eigen::VectorXf input;
 
     public:
-        NeuronActivationTests(): linearNeuron(3, Activation::linear),
-                                 stepNeuron(3, Activation::step),
-                                 sigmoidNeuron(3, Activation::sigmoid),
-                                 reluNeuron(3, Activation::ReLU),
+        NeuronActivationTests(): neuron(3, Activation::linear),
                                  input(3){
             input << 0.5f, 0.2f, 1.0f;
         }
@@ -30,33 +24,39 @@ class NeuronActivationTests : public ::testing::Test {
 
 // TODO: set seed on neuron random number generators to allow static testing
 
-TEST_F(NeuronActivationTests, linearForwardFeed) {
+TEST_F(NeuronActivationTests, linearActivation) {
 
-    float out = linearNeuron.forward(input);
-
-    // TODO: compare output with expected
-    FAIL();
+    ASSERT_EQ((int) (Activation::linear(12.3) * 100), 1230);
+    ASSERT_EQ((int) (Activation::linear(51.87) * 100), 5187);
 }
 
-TEST_F(NeuronActivationTests, stepForwardFeed) {
+TEST_F(NeuronActivationTests, stepActivation) {
 
-    float out = stepNeuron.forward(input);
-
-    FAIL();
+    ASSERT_EQ((int) Activation::step(0), 1);
+    ASSERT_EQ((int) Activation::step(0.001), 1);
+    ASSERT_EQ((int) Activation::step(-0.00001), 0);
+    ASSERT_EQ((int) Activation::step(100002), 1);
+    ASSERT_EQ((int) Activation::step(-111122), 0);
 }
 
-TEST_F(NeuronActivationTests, sigmoidForwardFeed) {
+TEST_F(NeuronActivationTests, sigmoidActivation) {
 
-    float out = sigmoidNeuron.forward(input);
-
-    FAIL();
+    ASSERT_EQ((int) (Activation::sigmoid(0.72) * 100), 67);
+    ASSERT_EQ((int) (Activation::sigmoid(15) * 100), 99);
+    ASSERT_EQ((int) (Activation::sigmoid(-2) * 100), 11);
 }
 
-TEST_F(NeuronActivationTests, reluForwardFeed) {
+TEST_F(NeuronActivationTests, tanhActivation) {
 
-    float out = reluNeuron.forward(input);
+    ASSERT_EQ((int) (Activation::tanh(1) * 100), 76);
+    ASSERT_EQ((int) (Activation::tanh(-0.5) * 100), -46);
+}
 
-    FAIL();
+TEST_F(NeuronActivationTests, reluActivation) {
+
+    ASSERT_EQ((int) Activation::ReLU(0), 0);
+    ASSERT_EQ((int) Activation::ReLU(5), 5);
+    ASSERT_EQ((int) Activation::ReLU(-0.00001), 0);
 }
 
 TEST_F(NeuronActivationTests, mismatchedSizeInput) {
@@ -64,5 +64,5 @@ TEST_F(NeuronActivationTests, mismatchedSizeInput) {
     Eigen::VectorXf dummyInput = Eigen::VectorXf(4);
     dummyInput << 1, 2, 3, 4;
 
-    ASSERT_THROW(linearNeuron.forward(dummyInput), std::runtime_error);
+    ASSERT_THROW(neuron.forward(dummyInput), std::runtime_error);
 }

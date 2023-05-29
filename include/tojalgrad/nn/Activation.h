@@ -15,6 +15,7 @@ namespace tojalgrad::nn {
                 static float linear(float in);
                 static float step(float in);
                 static float sigmoid(float in);
+                static float tanh(float in);
                 static float ReLU(float in);
         };
 

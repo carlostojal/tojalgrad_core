@@ -16,7 +16,11 @@ namespace tojalgrad {
         }
 
         float Activation::sigmoid(float in) {
-            return 1 / (1 + std::exp(in));
+            return 1 / (1 + std::exp(-in));
+        }
+
+        float Activation::tanh(float in) {
+            return (std::exp(in) - std::exp(-in)) / (std::exp(in) + std::exp(-in));
         }
 
         float Activation::ReLU(float in) {
