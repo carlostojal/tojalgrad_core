@@ -1,6 +1,0 @@
-#ifndef TOJALGRAD_CORE_LIBRARY_H
-#define TOJALGRAD_CORE_LIBRARY_H
-
-void hello();
-
-#endif //TOJALGRAD_CORE_LIBRARY_H
