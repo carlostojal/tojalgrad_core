@@ -1,0 +1,45 @@
+//
+// Created by carlostojal on 29-05-2023.
+//
+
+#include <tojalgrad/nn/Neuron.h>
+
+namespace tojalgrad::nn {
+
+        Neuron::Neuron(int n_inputs) {
+
+            std::random_device rd;
+            std::mt19937 gen(rd());
+            std::uniform_real_distribution<float> distrib(0.0f, 1.0f);
+
+            this->w = Eigen::VectorXf(n_inputs);
+
+            // lambda function to fill a given weight with a random value
+            auto initWithRandomValue = [](int index, Eigen::VectorXf& weights,
+                                          std::uniform_real_distribution<float>& distrib, std::mt19937& gen) {
+                if (index >= weights.size())
+                    throw std::runtime_error("Initialization weight index out of bounds!");
+
+                weights[index] = distrib(gen);
+            };
+
+            // create a thread to init each weight with a random value
+            std::vector<std::thread> threadList;
+            for (int i = 0; i < n_inputs; i++) {
+                threadList.emplace_back(initWithRandomValue, i, std::ref(this->w), std::ref(distrib), std::ref(gen));
+            }
+
+            // wait the threads
+            for(auto & t : threadList) {
+                t.join();
+            }
+        }
+
+        float Neuron::forward(const Eigen::VectorXf& inputs) {
+
+            float out = this->w.dot(inputs) + this->b;
+
+            return this->activation(out);
+        }
+
+    } // nn
