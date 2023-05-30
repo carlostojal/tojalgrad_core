@@ -16,6 +16,8 @@ namespace tojalgrad::nn {
 
             // set activation function
             this->activation = activation;
+
+            this->initRandomWeights();
         }
 
         float Neuron::forward(const Eigen::VectorXf& inputs) {
@@ -86,6 +88,14 @@ namespace tojalgrad::nn {
 
     void Neuron::setBias(float bias) {
         this->b = bias;
+    }
+
+    float Neuron::getError() const {
+        return this->error;
+    }
+
+    void Neuron::setError(float error) {
+        this->error = error;
     }
 
 } // nn

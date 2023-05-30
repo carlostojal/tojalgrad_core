@@ -11,11 +11,11 @@ namespace tojalgrad::nn {
     }
 
     float Activation::step(float in) {
-        return in < 0 ? 0 : 1;
+        return in < 0 ? 0.0f : 1.0f;
     }
 
     float Activation::sigmoid(float in) {
-        return 1 / (1 + std::exp(-in));
+        return (float) 1 / (1 + std::exp(-in));
     }
 
     float Activation::tanh(float in) {

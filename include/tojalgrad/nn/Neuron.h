@@ -30,6 +30,8 @@ namespace tojalgrad::nn {
                 /*! \brief The last activation value. */
                 float lastValue = 0;
 
+                float error = 0;
+
                 /*! \brief Neuron activation function. Some examples on tojalgrad::nn::Activation. */
                 std::function<float(float in)> activation = nullptr;
 
@@ -51,30 +53,14 @@ namespace tojalgrad::nn {
                  */
                 float forward(const Eigen::VectorXf& inputs);
 
-                /*! \brief Get the current weights vector. */
                 Eigen::VectorXf getWeights() const;
-
-                /*! \brief Set a new value to a given weight by index.
-                 *
-                 * @param index Index of the weight.
-                 * @param value The new value to that weight.
-                 */
                 void setWeight(int index, float value);
 
-                /*! \brief Get the last error value. */
-                float getError() const;
-
-                /*! \brief Set the error value.
-                 *
-                 * @param error The error value to set.
-                 */
-                void setError(float error);
-
-                /*! \brief Get the current bias. */
                 float getBias() const;
+                void setBias(float value);
 
-                /*! \brief Set a new bias value to this neuron. */
-                void setBias(float bias);
+                float getError() const;
+                void setError(float error);
 
                 /*! \brief Get the last activation value.
                  *

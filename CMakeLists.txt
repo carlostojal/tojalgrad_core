@@ -13,5 +13,5 @@ add_library(tojalgrad_core SHARED src/nn/Neuron.cpp src/nn/Activation.cpp src/nn
 target_link_libraries(tojalgrad_core ${Eigen3_LIBRARIES})
 
 
-add_executable(test test/NeuronActivationTests.cpp test/LayerTests.cpp test/ModelTests.cpp test/LossTests.cpp)
+add_executable(test test/NeuronActivationTests.cpp test/LayerTests.cpp test/ModelTests.cpp test/LossTests.cpp test/NeuronTrainingTests.cpp)
 target_link_libraries(test tojalgrad_core gtest gtest_main)
