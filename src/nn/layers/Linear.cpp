@@ -9,9 +9,30 @@ namespace tojalgrad::nn::layers {
     Linear::Linear(int in_features, int out_features, const std::function<float(float)>& activation) :
         Layer(in_features, out_features) {
 
+        // pre-allocate the neurons vector. enables parallelization without mutexes below
+        this->neurons.resize(out_features);
+
+        auto neuronInit = [](int index, int in_features, const std::function<float(float)>& activation,
+                std::vector<Neuron>& neurons) {
+
+            neurons[index] = Neuron(in_features, activation);
+        };
+
+        std::vector<std::thread> threads;
+
+        // TODO: acceleration here
         // init the neurons
-        for(int i = 0; i < out_features; i++)
-            this->neurons.emplace_back(in_features, activation);
+        for(int i = 0; i < out_features; i++) {
+            // calling all these threads is leading the system out of resources
+            // threads.emplace_back(neuronInit, i, in_features, std::ref(activation), std::ref(this->neurons));
+            neuronInit(i, in_features, activation, this->neurons);
+        }
+
+        // wait the threads
+        /*
+        for(auto & t : threads)
+            t.join();
+            */
     }
 
     Eigen::VectorXf Linear::forward(Eigen::VectorXf in) {

@@ -39,6 +39,8 @@ namespace tojalgrad::nn {
                 void initRandomWeights();
 
             public:
+                Neuron();
+
                 /*! \brief Construct a Neuron.
                  *
                  * @param n_inputs Number of connections to the previous layer.
