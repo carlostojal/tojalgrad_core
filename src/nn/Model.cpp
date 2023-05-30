@@ -18,9 +18,14 @@ namespace tojalgrad::nn {
             layer->prev = layer;
         } else { // add the layer to the tail
             layers::Layer *tail = this->first->prev;
+
+            if(tail->getOutFeatures() != layer->getInFeatures())
+                throw std::runtime_error("Mismatched layer feature dimensions!");
+
+            this->first->prev = layer;
             tail->next = layer;
             layer->prev = tail;
-            layer->next = this->first;
+            layer->next = nullptr;
         }
     }
 

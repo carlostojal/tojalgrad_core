@@ -23,8 +23,21 @@ TEST_F(ModelTests, createValidModel) {
     layers::Linear l3 = layers::Linear(5, 8, Activation::ReLU);
     layers::Linear l4 = layers::Linear(8, 1, Activation::ReLU);
 
-    EXPECT_NO_THROW(m.add(&l1));
-    EXPECT_NO_THROW(m.add(&l2));
-    EXPECT_NO_THROW(m.add(&l3));
-    EXPECT_NO_THROW(m.add(&l4));
+    ASSERT_NO_THROW(m.add(&l1));
+    ASSERT_NO_THROW(m.add(&l2));
+    ASSERT_NO_THROW(m.add(&l3));
+    ASSERT_NO_THROW(m.add(&l4));
+}
+
+TEST_F(ModelTests, createInvalidModel) {
+
+    Model m = Model();
+
+    layers::Linear l1 = layers::Linear(2, 3, Activation::ReLU);
+    layers::Linear l2 = layers::Linear(3, 5, Activation::ReLU);
+    layers::Linear l3 = layers::Linear(7, 8, Activation::ReLU); // input should be 5
+
+    ASSERT_NO_THROW(m.add(&l1));
+    ASSERT_NO_THROW(m.add(&l2));
+    ASSERT_THROW(m.add(&l3), std::runtime_error);
 }
