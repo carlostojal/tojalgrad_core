@@ -68,4 +68,24 @@ namespace tojalgrad::nn {
         return this->lastValue;
     }
 
+    Eigen::VectorXf Neuron::getWeights() const {
+        return this->w;
+    }
+
+    void Neuron::setWeight(int index, float value) {
+
+        if(index < 0 || index >= this->w.size())
+            throw std::runtime_error("Tried to set an invalid weight index!");
+
+        this->w[index] = value;
+    }
+
+    float Neuron::getBias() const {
+        return this->b;
+    }
+
+    void Neuron::setBias(float bias) {
+        this->b = bias;
+    }
+
 } // nn

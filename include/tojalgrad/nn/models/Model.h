@@ -13,9 +13,12 @@ namespace tojalgrad::nn {
     /*! \brief Neural network model class. Represents any neural network model. */
     class Model {
 
-        private:
+        protected:
             /*! \brief Pointer to the first layer of the network. */
             tojalgrad::nn::layers::Layer *first = nullptr;
+
+            float learning_rate = 1;
+
 
         public:
             /*! \brief Class constructor */
@@ -33,6 +36,15 @@ namespace tojalgrad::nn {
              * @return Activation vector.
              */
             Eigen::VectorXf forward(const Eigen::VectorXf& in);
+
+            /*! \brief Get the model's current learning rate. */
+            float getLearningRate() const;
+
+            /*! \brief Set the model's learning rate.
+             *
+             * @param learning_rate The model's learning rate.
+             */
+            void setLearningRate(float learning_rate);
     };
 
 } // nn

@@ -51,6 +51,31 @@ namespace tojalgrad::nn {
                  */
                 float forward(const Eigen::VectorXf& inputs);
 
+                /*! \brief Get the current weights vector. */
+                Eigen::VectorXf getWeights() const;
+
+                /*! \brief Set a new value to a given weight by index.
+                 *
+                 * @param index Index of the weight.
+                 * @param value The new value to that weight.
+                 */
+                void setWeight(int index, float value);
+
+                /*! \brief Get the last error value. */
+                float getError() const;
+
+                /*! \brief Set the error value.
+                 *
+                 * @param error The error value to set.
+                 */
+                void setError(float error);
+
+                /*! \brief Get the current bias. */
+                float getBias() const;
+
+                /*! \brief Set a new bias value to this neuron. */
+                void setBias(float bias);
+
                 /*! \brief Get the last activation value.
                  *
                  * @return The last activation value.

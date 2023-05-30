@@ -40,6 +40,9 @@ namespace tojalgrad::nn::layers {
              */
             Eigen::VectorXf forward(Eigen::VectorXf in) override;
 
+            /*! \brief Compute the error of this layer. */
+            Eigen::VectorXf backPropagate() override;
+
     };
 } // layers
 

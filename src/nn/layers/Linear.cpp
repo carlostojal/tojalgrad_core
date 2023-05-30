@@ -41,4 +41,21 @@ namespace tojalgrad::nn::layers {
         return out;
     }
 
+    Eigen::VectorXf Linear::backPropagate() {
+
+        if(this->next == nullptr)
+            throw std::runtime_error("Can't backpropagate as this is the last layer!");
+
+        Eigen::VectorXf errors(this->n_neurons);
+
+        // compute weighted sum error for each neuron
+        for(auto & n : this->neurons) {
+
+            // TODO
+
+        }
+
+        return errors;
+    }
+
 } // layers

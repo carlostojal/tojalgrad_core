@@ -47,4 +47,12 @@ namespace tojalgrad::nn {
 
         return cur;
     }
+
+    float Model::getLearningRate() const {
+        return this->learning_rate;
+    }
+
+    void Model::setLearningRate(float learning_rate) {
+        this->learning_rate = learning_rate;
+    }
 } // nn
