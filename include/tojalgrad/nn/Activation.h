@@ -9,15 +9,25 @@
 
 namespace tojalgrad::nn {
 
-        class Activation {
+    /*! \brief Collection of activation functions. */
+    class Activation {
 
-            public:
-                static float linear(float in);
-                static float step(float in);
-                static float sigmoid(float in);
-                static float tanh(float in);
-                static float ReLU(float in);
-        };
+        public:
+            /*! \brief Linear activation. */
+            static float linear(float in);
+
+            /*! \brief Step activation. */
+            static float step(float in);
+
+            /*! \brief Sigmoid activation. */
+            static float sigmoid(float in);
+
+            /*! \brief Tanh activation. */
+            static float tanh(float in);
+
+            /*! \brief ReLU activation. */
+            static float ReLU(float in);
+    };
 
 } // nn
 
