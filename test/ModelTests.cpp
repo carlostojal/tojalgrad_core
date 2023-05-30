@@ -41,3 +41,44 @@ TEST_F(ModelTests, createInvalidModel) {
     ASSERT_NO_THROW(m.add(&l2));
     ASSERT_THROW(m.add(&l3), std::runtime_error);
 }
+
+TEST_F(ModelTests, validForwardPass) {
+    Model m = Model();
+
+    layers::Linear l1 = layers::Linear(2, 3, Activation::ReLU);
+    layers::Linear l2 = layers::Linear(3, 5, Activation::ReLU);
+    layers::Linear l3 = layers::Linear(5, 8, Activation::ReLU);
+    layers::Linear l4 = layers::Linear(8, 1, Activation::ReLU);
+
+    m.add(&l1);
+    m.add(&l2);
+    m.add(&l3);
+    m.add(&l4);
+
+    Eigen::VectorXf in(2);
+    in << 1.2f, 5.22f;
+
+    Eigen::VectorXf out;
+    ASSERT_NO_THROW(out = m.forward(in));
+
+    ASSERT_EQ(out.size(), 1);
+}
+
+TEST_F(ModelTests, invalidForwardPass) {
+
+    Model m = Model();
+
+    layers::Linear l1 = layers::Linear(2, 3, Activation::ReLU);
+    layers::Linear l2 = layers::Linear(3, 5, Activation::ReLU);
+    layers::Linear l3 = layers::Linear(5, 8, Activation::ReLU);
+    layers::Linear l4 = layers::Linear(8, 1, Activation::ReLU);
+
+    m.add(&l1);
+    m.add(&l2);
+    m.add(&l3);
+    m.add(&l4);
+
+    Eigen::VectorXf in(1);
+    in << 1.2f;
+    ASSERT_THROW(m.forward(in), std::runtime_error);
+}
