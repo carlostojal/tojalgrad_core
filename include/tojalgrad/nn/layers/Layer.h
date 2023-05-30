@@ -11,10 +11,19 @@ namespace tojalgrad::nn::layers {
 
     class Layer {
         protected:
+            Layer(int in_features, int out_features);
+
+            int in_features;
+            int out_features;
+
+        public:
+            Layer *next = nullptr;
+            Layer *prev = nullptr;
 
             virtual Eigen::VectorXf forward(Eigen::VectorXf in) = 0;
 
-            Layer *next = nullptr;
+            int getInFeatures() const;
+            int getOutFeatures() const;
     };
 } // layers
 

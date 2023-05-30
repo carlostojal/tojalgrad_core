@@ -12,7 +12,7 @@
 
 namespace tojalgrad::nn::layers {
 
-    class Linear : Layer {
+    class Linear : public Layer {
 
         private:
             std::vector<tojalgrad::nn::Neuron> neurons;
@@ -20,7 +20,7 @@ namespace tojalgrad::nn::layers {
             int n_neurons = 0;
 
         public:
-            Linear(int input_neurons, int output_neurons, const std::function<float(float)>& activation);
+            Linear(int in_features, int out_features, const std::function<float(float)>& activation);
 
             Eigen::VectorXf forward(Eigen::VectorXf in) override;
 

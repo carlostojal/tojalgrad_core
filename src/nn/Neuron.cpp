@@ -8,6 +8,9 @@ namespace tojalgrad::nn {
 
         Neuron::Neuron(int n_inputs, const std::function<float(float in)>& activation) {
 
+            if(n_inputs <= 0)
+                throw std::runtime_error("Invalid number of neuron inputs!");
+
             // allocate weights vector
             this->w = Eigen::VectorXf(n_inputs);
 

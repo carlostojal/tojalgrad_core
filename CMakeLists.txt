@@ -9,7 +9,7 @@ add_subdirectory(lib/googletest)
 
 include_directories(include ${Eigen3_INCLUDE_DIRS})
 
-add_library(tojalgrad_core SHARED src/nn/Neuron.cpp src/nn/Activation.cpp src/nn/layers/Linear.cpp include/tojalgrad/nn/layers/Linear.h src/nn/layers/Layer.cpp include/tojalgrad/nn/layers/Layer.h)
+add_library(tojalgrad_core SHARED src/nn/Neuron.cpp src/nn/Activation.cpp src/nn/layers/Linear.cpp src/nn/layers/Layer.cpp src/nn/Model.cpp)
 target_link_libraries(tojalgrad_core ${Eigen3_LIBRARIES})
 
 

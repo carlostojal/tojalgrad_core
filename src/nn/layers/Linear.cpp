@@ -6,26 +6,24 @@
 
 namespace tojalgrad::nn::layers {
 
-    Linear::Linear(int input_neurons, int output_neurons, const std::function<float(float)>& activation) {
-
-        this->n_inputs = input_neurons;
-        this->n_neurons = output_neurons;
+    Linear::Linear(int in_features, int out_features, const std::function<float(float)>& activation) :
+        Layer(in_features, out_features) {
 
         // init the neurons
-        for(int i = 0; i < output_neurons; i++)
-            this->neurons.emplace_back(input_neurons, activation);
+        for(int i = 0; i < out_features; i++)
+            this->neurons.emplace_back(in_features, activation);
     }
 
     Eigen::VectorXf Linear::forward(Eigen::VectorXf in) {
 
         // check input size with the number of neuron inputs
-        if(in.size() != this->n_inputs)
+        if(in.size() != this->in_features)
             throw std::runtime_error("Unexpected input size!");
 
-        Eigen::VectorXf out(this->n_neurons);
+        Eigen::VectorXf out(this->out_features);
 
         // activate each neuron of the layer with the input
-        for(int i = 0; i < this->n_neurons; i++)
+        for(int i = 0; i < this->out_features; i++)
             out[i] = this->neurons[i].forward(in);
 
         return out;
