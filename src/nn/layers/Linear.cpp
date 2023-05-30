@@ -43,8 +43,10 @@ namespace tojalgrad::nn::layers {
 
     Eigen::VectorXf Linear::backPropagate() {
 
-        if(this->next == nullptr)
+        // TODO: this is the last layer, use the loss
+        if(this->next == nullptr) {
             throw std::runtime_error("Can't backpropagate as this is the last layer!");
+        }
 
         Eigen::VectorXf errors(this->n_neurons);
 

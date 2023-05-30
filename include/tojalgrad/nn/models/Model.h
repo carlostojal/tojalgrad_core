@@ -8,7 +8,7 @@
 #include <vector>
 #include <tojalgrad/nn/layers/Layer.h>
 
-namespace tojalgrad::nn {
+namespace tojalgrad::nn::models {
 
     /*! \brief Neural network model class. Represents any neural network model. */
     class Model {
@@ -17,6 +17,10 @@ namespace tojalgrad::nn {
             /*! \brief Pointer to the first layer of the network. */
             tojalgrad::nn::layers::Layer *first = nullptr;
 
+            /*! \brief Loss function to use on backpropagation. */
+            std::function<float(Eigen::VectorXf,Eigen::VectorXf)> loss = nullptr;
+
+            /*! \brief The model's learning rate. */
             float learning_rate = 1;
 
 
@@ -45,8 +49,15 @@ namespace tojalgrad::nn {
              * @param learning_rate The model's learning rate.
              */
             void setLearningRate(float learning_rate);
+
+            /*! \brief Get the set loss function. */
+            std::function<float(const Eigen::VectorXf &, const Eigen::VectorXf &)> getLossFunction() const;
+
+            /*! \brief Set the model's loss function. */
+            void setLossFunction(const std::function<float(const Eigen::VectorXf &, const Eigen::VectorXf &)> &fn);
+
     };
 
-} // nn
+} // models
 
 #endif //TOJALGRAD_CORE_MODEL_H

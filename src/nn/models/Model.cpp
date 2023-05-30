@@ -4,7 +4,7 @@
 
 #include <tojalgrad/nn/models/Model.h>
 
-namespace tojalgrad::nn {
+namespace tojalgrad::nn::models {
 
     Model::Model() {
         this->first = nullptr;
@@ -54,5 +54,13 @@ namespace tojalgrad::nn {
 
     void Model::setLearningRate(float learning_rate) {
         this->learning_rate = learning_rate;
+    }
+
+    std::function<float(const Eigen::VectorXf &, const Eigen::VectorXf &)> Model::getLossFunction() const {
+        return this->loss;
+    }
+
+    void Model::setLossFunction(const std::function<float(const Eigen::VectorXf &, const Eigen::VectorXf &)> &fn) {
+        this->loss = fn;
     }
 } // nn

@@ -17,7 +17,7 @@ class ModelTests : public ::testing::Test {
 
 TEST_F(ModelTests, createValidModel) {
 
-    Model m = Model();
+    models::Model m = models::Model();
 
     layers::Linear l1 = layers::Linear(2, 3, Activation::ReLU);
     layers::Linear l2 = layers::Linear(3, 5, Activation::ReLU);
@@ -32,7 +32,7 @@ TEST_F(ModelTests, createValidModel) {
 
 TEST_F(ModelTests, createInvalidModel) {
 
-    Model m = Model();
+    models::Model m = models::Model();
 
     layers::Linear l1 = layers::Linear(2, 3, Activation::ReLU);
     layers::Linear l2 = layers::Linear(3, 5, Activation::ReLU);
@@ -44,7 +44,7 @@ TEST_F(ModelTests, createInvalidModel) {
 }
 
 TEST_F(ModelTests, validForwardPass) {
-    Model m = Model();
+    models::Model m = models::Model();
 
     layers::Linear l1 = layers::Linear(2, 3, Activation::ReLU);
     layers::Linear l2 = layers::Linear(3, 5, Activation::ReLU);
@@ -67,7 +67,7 @@ TEST_F(ModelTests, validForwardPass) {
 
 TEST_F(ModelTests, invalidForwardPass) {
 
-    Model m = Model();
+    models::Model m = models::Model();
 
     layers::Linear l1 = layers::Linear(2, 3, Activation::ReLU);
     layers::Linear l2 = layers::Linear(3, 5, Activation::ReLU);
