@@ -13,7 +13,7 @@ namespace tojalgrad::nn {
     class Model {
 
         private:
-            tojalgrad::nn::layers::Layer *first;
+            tojalgrad::nn::layers::Layer *first = nullptr;
 
         public:
             Model();

@@ -6,6 +6,10 @@
 
 namespace tojalgrad::nn {
 
+    Model::Model() {
+        this->first = nullptr;
+    }
+
     void Model::add(layers::Layer *layer) {
 
         // empty model
