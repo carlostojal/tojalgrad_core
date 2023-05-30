@@ -26,4 +26,8 @@ namespace tojalgrad::nn {
         return std::max(0.0f, in);
     }
 
+    float Activation::sign(float in) {
+        return in < 0 ? -1.0f : 1.0f;
+    }
+
 } // nn

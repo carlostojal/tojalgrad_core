@@ -24,8 +24,8 @@ namespace tojalgrad::nn {
                 // weights and bias
                 /*! \brief Weights vector. One weight for each connection on the previous layer. Starts randomly. */
                 Eigen::VectorXf w;
-                /*! \brief Bias value. Starts at zero. */
-                float b = 0;
+                /*! \brief Bias value. Starts at 1. */
+                float b = 1.0f;
 
                 /*! \brief The last activation value. */
                 float lastValue = 0;

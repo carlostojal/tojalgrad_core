@@ -19,6 +19,9 @@ namespace tojalgrad::nn {
             /*! \brief Step activation. */
             static float step(float in);
 
+            /*! \brief Signal activation. */
+            static float sign(float in);
+
             /*! \brief Sigmoid activation. */
             static float sigmoid(float in);
 
