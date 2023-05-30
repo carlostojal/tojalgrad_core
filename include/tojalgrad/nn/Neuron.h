@@ -57,7 +57,7 @@ namespace tojalgrad::nn {
                  */
                 float getLastValue();
         };
-        
+
 } // nn
 
 #endif //TOJALGRAD_CORE_NEURON_H
