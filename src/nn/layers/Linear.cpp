@@ -23,6 +23,7 @@ namespace tojalgrad::nn::layers {
         Eigen::VectorXf out(this->out_features);
 
         // activate each neuron of the layer with the input
+        // TODO: acceleration here
         for(int i = 0; i < this->out_features; i++)
             out[i] = this->neurons[i].forward(in);
 
