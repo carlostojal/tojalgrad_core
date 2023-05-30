@@ -5,6 +5,17 @@ set(CMAKE_CXX_STANDARD 20)
 
 find_package(Eigen3 REQUIRED)
 
+find_package(OpenCL QUIET)
+
+if(OpenCL_FOUND)
+    set(USE_OPENCL 1)
+    include_directories(${OpenCL_INCLUDE_DIRS})
+    add_definitions(-DUSE_OPENCL)
+    message(STATUS "OpenCL found, using GPU acceleration.")
+else()
+    message(WARNING "OpenCL not found, using CPU only!")
+endif()
+
 add_subdirectory(lib/googletest)
 
 include_directories(include ${Eigen3_INCLUDE_DIRS})
