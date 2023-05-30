@@ -16,7 +16,8 @@ namespace tojalgrad {
         class Loss {
 
             public:
-                static float MSE(const Eigen::VectorXf &v1, const Eigen::VectorXf &v2);
+                static float MSE(const Eigen::VectorXf &ground_truth, const Eigen::VectorXf &prediction);
+                static float CrossEntropy(const Eigen::VectorXf& ground_truth, const Eigen::VectorXf& prediction);
 
         };
 

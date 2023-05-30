@@ -21,3 +21,13 @@ TEST_F(LossTests, mseLoss) {
 
     ASSERT_EQ((int) (loss * 100), 466);
 }
+
+TEST_F(LossTests, crossEntropyLoss) {
+
+    Eigen::Vector4f v1(0, 1.0f, 0, 0);
+    Eigen::Vector4f v2(0.5f, 0.7f, 0.1f, 0.2f);
+
+    float loss = Loss::CrossEntropy(v1, v2);
+
+    ASSERT_EQ((int) (loss * 100), 51);
+}
