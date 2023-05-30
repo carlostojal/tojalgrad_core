@@ -21,11 +21,22 @@ namespace tojalgrad::nn::layers {
             throw std::runtime_error("Unexpected input size!");
 
         Eigen::VectorXf out(this->out_features);
+        std::vector<std::thread> threads;
+
+        auto neuronForward = [](int index, const Eigen::VectorXf& in, Eigen::VectorXf& out,
+                std::vector<Neuron>& neurons) {
+            out[index] = neurons[index].forward(in);
+        };
 
         // activate each neuron of the layer with the input
         // TODO: acceleration here
         for(int i = 0; i < this->out_features; i++)
-            out[i] = this->neurons[i].forward(in);
+            threads.emplace_back(neuronForward, i, std::ref(in), std::ref(out), std::ref(this->neurons));
+
+        // wait for the threads
+        for(auto & t : threads) {
+            t.join();
+        }
 
         return out;
     }

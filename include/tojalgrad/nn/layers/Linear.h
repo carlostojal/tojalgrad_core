@@ -9,6 +9,7 @@
 #include <tojalgrad/nn/layers/Layer.h>
 #include <tojalgrad/nn/Neuron.h>
 #include <vector>
+#include <thread>
 
 namespace tojalgrad::nn::layers {
 
