@@ -9,9 +9,14 @@
 
 namespace tojalgrad::nn::models {
 
+    /*! \brief BobNet neural network model.
+     *
+     * BobNet is a classic example of a Deep Neural Network (DNN) to classify the MNIST dataset.
+     */
     class BobNet : Model {
 
         public:
+            /*! \brief Class constructor. */
             BobNet();
     };
 
