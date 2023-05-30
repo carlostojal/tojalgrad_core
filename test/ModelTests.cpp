@@ -3,7 +3,8 @@
 //
 
 #include <gtest/gtest.h>
-#include <tojalgrad/nn/Model.h>
+#include <tojalgrad/nn/models/Model.h>
+#include <tojalgrad/nn/models/BobNet.h>
 #include <tojalgrad/nn/layers/Linear.h>
 #include <tojalgrad/nn/Activation.h>
 
@@ -81,4 +82,9 @@ TEST_F(ModelTests, invalidForwardPass) {
     Eigen::VectorXf in(1);
     in << 1.2f;
     ASSERT_THROW(m.forward(in), std::runtime_error);
+}
+
+TEST_F(ModelTests, bobNetInstantiation) {
+
+    ASSERT_NO_THROW(models::BobNet bobNet = models::BobNet());
 }

@@ -2,7 +2,7 @@
 // Created by carlostojal on 30-05-2023.
 //
 
-#include <tojalgrad/nn/Model.h>
+#include <tojalgrad/nn/models/Model.h>
 
 namespace tojalgrad::nn {
 
