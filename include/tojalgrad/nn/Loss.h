@@ -6,6 +6,8 @@
 #define TOJALGRAD_CORE_LOSS_H
 
 #include <eigen3/Eigen/Dense>
+#include <thread>
+#include <mutex>
 
 namespace tojalgrad {
     namespace nn {
