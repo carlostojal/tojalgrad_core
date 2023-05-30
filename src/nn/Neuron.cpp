@@ -20,6 +20,9 @@ namespace tojalgrad::nn {
 
         float Neuron::forward(const Eigen::VectorXf& inputs) {
 
+            if(this->activation == nullptr)
+                throw std::runtime_error("No activation function was set!");
+
             if(inputs.size() != this->w.size())
                 throw std::runtime_error("Mismatched input vector size!");
 
