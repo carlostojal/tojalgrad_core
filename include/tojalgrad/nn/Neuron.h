@@ -21,6 +21,8 @@ namespace tojalgrad {
                 Eigen::VectorXf w;
                 float b = 0;
 
+                float lastValue = 0;
+
                 std::function<float(float in)> activation = nullptr;
 
                 void initRandomWeights();
@@ -29,6 +31,8 @@ namespace tojalgrad {
                 explicit Neuron(int n_inputs, const std::function<float(float in)>& activation);
 
                 float forward(const Eigen::VectorXf& inputs);
+
+                float getLastValue();
         };
 
     } // tojalgrad

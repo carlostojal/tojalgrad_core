@@ -26,7 +26,9 @@ namespace tojalgrad::nn {
             // TODO: acceleration here
             float out = this->w.dot(inputs) + this->b;
 
-            return this->activation(out);
+            this->lastValue =  this->activation(out);
+
+            return this->lastValue;
         }
 
     void Neuron::initRandomWeights() {
@@ -57,6 +59,10 @@ namespace tojalgrad::nn {
         for(auto & t : threadList) {
             t.join();
         }
+    }
+
+    float Neuron::getLastValue() {
+        return this->lastValue;
     }
 
 } // nn
