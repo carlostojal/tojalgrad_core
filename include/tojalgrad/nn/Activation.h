@@ -5,7 +5,7 @@
 #ifndef TOJALGRAD_CORE_ACTIVATION_H
 #define TOJALGRAD_CORE_ACTIVATION_H
 
-#include <math.h>
+#include <cmath>
 
 namespace tojalgrad::nn {
 
