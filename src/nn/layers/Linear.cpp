@@ -2,11 +2,11 @@
 // Created by carlostojal on 30-05-2023.
 //
 
-#include <tojalgrad/nn/layers/Linear.h>
+#include <tojalgrad/nn/layers/Dense.h>
 
 namespace tojalgrad::nn::layers {
 
-    Linear::Linear(int in_features, int out_features, const std::function<float(float)>& activation) :
+    Dense::Dense(int in_features, int out_features, const std::function<float(float)>& activation) :
         Layer(in_features, out_features) {
 
         // init the neurons
@@ -14,7 +14,7 @@ namespace tojalgrad::nn::layers {
             this->neurons.emplace_back(in_features, activation);
     }
 
-    Eigen::VectorXf Linear::forward(Eigen::VectorXf in) {
+    Eigen::VectorXf Dense::forward(Eigen::VectorXf in) {
 
         // check input size with the number of neuron inputs
         if(in.size() != this->in_features)
@@ -41,7 +41,7 @@ namespace tojalgrad::nn::layers {
         return out;
     }
 
-    Eigen::VectorXf Linear::backPropagate() {
+    Eigen::VectorXf Dense::backPropagate() {
 
         // TODO: this is the last layer, use the loss
         if(this->next == nullptr) {

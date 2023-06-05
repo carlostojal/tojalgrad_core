@@ -5,7 +5,7 @@
 #include <gtest/gtest.h>
 #include <tojalgrad/nn/models/Model.h>
 #include <tojalgrad/nn/models/BobNet.h>
-#include <tojalgrad/nn/layers/Linear.h>
+#include <tojalgrad/nn/layers/Dense.h>
 #include <tojalgrad/nn/Activation.h>
 
 using namespace tojalgrad::nn;
@@ -19,10 +19,10 @@ TEST_F(ModelTests, createValidModel) {
 
     models::Model m = models::Model();
 
-    layers::Linear l1 = layers::Linear(2, 3, Activation::ReLU);
-    layers::Linear l2 = layers::Linear(3, 5, Activation::ReLU);
-    layers::Linear l3 = layers::Linear(5, 8, Activation::ReLU);
-    layers::Linear l4 = layers::Linear(8, 1, Activation::ReLU);
+    layers::Dense l1 = layers::Dense(2, 3, Activation::ReLU);
+    layers::Dense l2 = layers::Dense(3, 5, Activation::ReLU);
+    layers::Dense l3 = layers::Dense(5, 8, Activation::ReLU);
+    layers::Dense l4 = layers::Dense(8, 1, Activation::ReLU);
 
     ASSERT_NO_THROW(m.add(&l1));
     ASSERT_NO_THROW(m.add(&l2));
@@ -34,9 +34,9 @@ TEST_F(ModelTests, createInvalidModel) {
 
     models::Model m = models::Model();
 
-    layers::Linear l1 = layers::Linear(2, 3, Activation::ReLU);
-    layers::Linear l2 = layers::Linear(3, 5, Activation::ReLU);
-    layers::Linear l3 = layers::Linear(7, 8, Activation::ReLU); // input should be 5
+    layers::Dense l1 = layers::Dense(2, 3, Activation::ReLU);
+    layers::Dense l2 = layers::Dense(3, 5, Activation::ReLU);
+    layers::Dense l3 = layers::Dense(7, 8, Activation::ReLU); // input should be 5
 
     ASSERT_NO_THROW(m.add(&l1));
     ASSERT_NO_THROW(m.add(&l2));
@@ -46,10 +46,10 @@ TEST_F(ModelTests, createInvalidModel) {
 TEST_F(ModelTests, validForwardPass) {
     models::Model m = models::Model();
 
-    layers::Linear l1 = layers::Linear(2, 3, Activation::ReLU);
-    layers::Linear l2 = layers::Linear(3, 5, Activation::ReLU);
-    layers::Linear l3 = layers::Linear(5, 8, Activation::ReLU);
-    layers::Linear l4 = layers::Linear(8, 1, Activation::ReLU);
+    layers::Dense l1 = layers::Dense(2, 3, Activation::ReLU);
+    layers::Dense l2 = layers::Dense(3, 5, Activation::ReLU);
+    layers::Dense l3 = layers::Dense(5, 8, Activation::ReLU);
+    layers::Dense l4 = layers::Dense(8, 1, Activation::ReLU);
 
     m.add(&l1);
     m.add(&l2);
@@ -69,10 +69,10 @@ TEST_F(ModelTests, invalidForwardPass) {
 
     models::Model m = models::Model();
 
-    layers::Linear l1 = layers::Linear(2, 3, Activation::ReLU);
-    layers::Linear l2 = layers::Linear(3, 5, Activation::ReLU);
-    layers::Linear l3 = layers::Linear(5, 8, Activation::ReLU);
-    layers::Linear l4 = layers::Linear(8, 1, Activation::ReLU);
+    layers::Dense l1 = layers::Dense(2, 3, Activation::ReLU);
+    layers::Dense l2 = layers::Dense(3, 5, Activation::ReLU);
+    layers::Dense l3 = layers::Dense(5, 8, Activation::ReLU);
+    layers::Dense l4 = layers::Dense(8, 1, Activation::ReLU);
 
     m.add(&l1);
     m.add(&l2);

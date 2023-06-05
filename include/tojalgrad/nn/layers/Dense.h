@@ -2,8 +2,8 @@
 // Created by carlostojal on 30-05-2023.
 //
 
-#ifndef TOJALGRAD_CORE_LINEAR_H
-#define TOJALGRAD_CORE_LINEAR_H
+#ifndef TOJALGRAD_CORE_DENSE_H
+#define TOJALGRAD_CORE_DENSE_H
 
 #include <functional>
 #include <tojalgrad/nn/layers/Layer.h>
@@ -13,8 +13,8 @@
 
 namespace tojalgrad::nn::layers {
 
-    /*! \brief Linear layer class. */
-    class Linear : public Layer {
+    /*! \brief Dense layer class. */
+    class Dense : public Layer {
 
         private:
             /*! \brief Vector of neurons on this layer. */
@@ -31,7 +31,7 @@ namespace tojalgrad::nn::layers {
              * @param out_features Number of output features (i.e. number of neurons on this layer.
              * @param activation Activation function. Examples at tojalgrad::nn::Activation.
              */
-            Linear(int in_features, int out_features, const std::function<float(float)>& activation);
+            Dense(int in_features, int out_features, const std::function<float(float)>& activation);
 
             /*! \brief Forward pass method.
              *
@@ -46,4 +46,4 @@ namespace tojalgrad::nn::layers {
     };
 } // layers
 
-#endif //TOJALGRAD_CORE_LINEAR_H
+#endif //TOJALGRAD_CORE_DENSE_H
