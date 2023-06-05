@@ -6,6 +6,12 @@
 
 namespace tojalgrad::nn {
 
+        Neuron::Neuron() {
+            this->w = Eigen::VectorXf(0);
+            this->b = 0.0f;
+            this->activation = nullptr;
+        }
+
         Neuron::Neuron(int n_inputs, const std::function<float(float in)>& activation) {
 
             if(n_inputs <= 0)
@@ -51,13 +57,15 @@ namespace tojalgrad::nn {
             if (index < 0 || index >= weights.size())
                 throw std::runtime_error("Initialization weight index out of bounds!");
 
-            weights[index] = distrib(gen);
+            // weights[index] = distrib(gen);
         };
 
         // create a thread to init each weight with a random value
         std::vector<std::thread> threadList;
         for (int i = 0; i < n_weights; i++) {
-            threadList.emplace_back(initWithRandomValue, i, std::ref(this->w), std::ref(distrib), std::ref(gen));
+            std::thread t(initWithRandomValue, i, std::ref(this->w), std::ref(distrib), std::ref(gen));
+            threadList.emplace_back(std::move(t));
+            // threadList.emplace_back(initWithRandomValue, i, std::ref(this->w), std::ref(distrib), std::ref(gen));
         }
 
         // wait the threads
