@@ -20,7 +20,7 @@ add_subdirectory(lib/googletest)
 
 include_directories(include ${Eigen3_INCLUDE_DIRS})
 
-add_library(tojalgrad_core SHARED src/nn/Neuron.cpp src/nn/Activation.cpp src/nn/layers/Linear.cpp src/nn/layers/Layer.cpp src/nn/models/Model.cpp src/nn/models/BobNet.cpp src/nn/Loss.cpp include/tojalgrad/nn/Loss.h)
+add_library(tojalgrad_core SHARED src/nn/Neuron.cpp src/nn/Activation.cpp src/nn/layers/Dense.cpp src/nn/layers/Layer.cpp src/nn/models/Model.cpp src/nn/models/BobNet.cpp src/nn/Loss.cpp include/tojalgrad/nn/Loss.h)
 target_link_libraries(tojalgrad_core ${Eigen3_LIBRARIES})
 
 
