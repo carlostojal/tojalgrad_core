@@ -56,7 +56,7 @@ namespace tojalgrad::nn {
                 float forward(const Eigen::VectorXf& inputs);
 
                 Eigen::VectorXf getWeights() const;
-                void setWeight(int index, float value);
+                void setWeight(unsigned int index, float value);
 
                 float getBias() const;
                 void setBias(float value);
@@ -68,7 +68,7 @@ namespace tojalgrad::nn {
                  *
                  * @return The last activation value.
                  */
-                float getLastValue();
+                float getLastValue() const;
         };
 
 } // nn

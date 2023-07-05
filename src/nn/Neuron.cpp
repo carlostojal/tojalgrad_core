@@ -47,7 +47,7 @@ namespace tojalgrad::nn {
         std::mt19937 gen(rd());
         std::uniform_real_distribution<float> distrib(0.0f, 1.0f);
 
-        int n_weights = this->w.size();
+        unsigned int n_weights = this->w.size();
         if(n_weights == 0)
             throw std::runtime_error("Weights have no size");
 
@@ -74,7 +74,7 @@ namespace tojalgrad::nn {
         }
     }
 
-    float Neuron::getLastValue() {
+    float Neuron::getLastValue() const {
         return this->lastValue;
     }
 
@@ -82,9 +82,9 @@ namespace tojalgrad::nn {
         return this->w;
     }
 
-    void Neuron::setWeight(int index, float value) {
+    void Neuron::setWeight(unsigned int index, float value) {
 
-        if(index < 0 || index >= this->w.size())
+        if(index >= this->w.size())
             throw std::runtime_error("Tried to set an invalid weight index!");
 
         this->w[index] = value;
