@@ -41,11 +41,17 @@ TEST_F(NeuronTrainingTests, perceptronANDGate) {
             // compute the expected output (and gate)
             int expected = x1 & x2;
 
+            // 0 is replaced by -1
+            if(x1 == 0)
+                x1 = -1;
+            if(x2 == 0)
+                x2 = -1;
+
             // compute the output
             float output = neuron.forward(Eigen::Vector2f(x1, x2));
 
             // compute the error
-            int error = expected - (int) output;
+            float error = (float) expected - output;
 
             std::cout << "Inputs: " << std::fixed << x1 << " " << std::fixed << x2 << " | Expected: " << std::fixed <<
             expected << " | Output: " << std::fixed << output << " | Error: " << std::fixed << error << std::endl;
@@ -69,7 +75,7 @@ TEST_F(NeuronTrainingTests, perceptronANDGate) {
 
         // std::cout << "Right samples: " << right_samples << "\n";
 
-    } while(right_samples != 4);
+    } while(epoch < 5);
 
     std::cout << "\nFinal weights: " << neuron.getWeights() << " Bias: " << neuron.getBias() << std::endl;
 
@@ -77,6 +83,9 @@ TEST_F(NeuronTrainingTests, perceptronANDGate) {
         int x1 = (i & 0b10) >> 1;
         int x2 = i & 0b01;
 
-        ASSERT_EQ((int) neuron.forward(Eigen::Vector2f(x1, x2)), x1 & x2);
+        int x1_in = x1 == 0 ? -1 : x1;
+        int x2_in = x2 == 0 ? -1 : x2;
+
+        ASSERT_EQ((int) neuron.forward(Eigen::Vector2f(x1_in, x2_in)), x1 & x2);
     }
 }
