@@ -38,7 +38,7 @@ namespace tojalgrad::nn::layers {
             virtual Eigen::VectorXf forward(Eigen::VectorXf in) = 0;
 
             /*! \brief Compute the neuron's losses. */
-            virtual Eigen::VectorXf backPropagate() = 0;
+            virtual void backPropagate(const Eigen::VectorXf& out, float learning_rate) = 0;
 
             /*! \brief Get number of input features. */
             int getInFeatures() const;

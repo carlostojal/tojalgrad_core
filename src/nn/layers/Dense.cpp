@@ -41,6 +41,8 @@ namespace tojalgrad::nn::layers {
         if(in.size() != this->in_features)
             throw std::runtime_error("Unexpected input size!");
 
+        this->lastInput = in;
+
         Eigen::VectorXf out(this->out_features);
         std::vector<std::thread> threads;
 
@@ -62,23 +64,60 @@ namespace tojalgrad::nn::layers {
         return out;
     }
 
-    Eigen::VectorXf Dense::backPropagate() {
+    void Dense::backPropagate(const Eigen::VectorXf& out, float learning_rate) {
 
-        // TODO: this is the last layer, use the loss
+        // TODO: add acceleration and multi-threading
+
+        // this is an output layer
         if(this->next == nullptr) {
-            throw std::runtime_error("Can't backpropagate as this is the last layer!");
+            for(unsigned int k = 0; k < this->n_neurons; k++) {
+                float ak = out[k];
+
+                // set the delta error
+                this->neurons[k].setError((1 - ak) * ak * (1 - ak));
+
+                // update bias
+                this->neurons[k].setBias(this->neurons[k].getBias() + learning_rate * this->neurons[k].getError());
+
+                // update weights
+                for(unsigned int h = 0; h < this->n_inputs; h++) {
+                    this->neurons[k].setWeight(h, this->neurons[k].getWeights()[h] + learning_rate *
+                                                                                     this->neurons[k].getError() *
+                                                                                     this->lastInput[h]);
+                }
+            }
+        } else {
+            // this is a hidden layer
+            for(unsigned int h = 0; h < this->n_neurons; h++) {
+                float ah = this->neurons[h].getLastValue();
+
+                // this is the weighted sum of the errors on the next layer
+                float weightedErrors = 0;
+                for(unsigned int k = 0; k < this->next->getOutFeatures(); k++) {
+                    weightedErrors += this->next->neurons[k].getWeights()[h] * this->next->neurons[k].getError();
+                }
+
+                // set the delta error
+                this->neurons[h].setError(ah * (1 - ah) * weightedErrors);
+
+                // update bias
+                this->neurons[h].setBias(this->neurons[h].getBias() + learning_rate * this->neurons[h].getError());
+
+                // update weights
+                for(unsigned int x = 0; x < this->in_features; x++) {
+                    this->neurons[h].setWeight(x, this->neurons[h].getWeights()[x] + learning_rate *
+                                                                                    this->neurons[h].getError() *
+                                                                                    this->lastInput[x]);
+                }
+            }
         }
 
-        Eigen::VectorXf errors(this->n_neurons);
+        // this was the last (first) layer, nothing more to do
+        if(this->prev == nullptr)
+            return;
 
-        // compute weighted sum error for each neuron
-        for(auto & n : this->neurons) {
-
-            // TODO
-
-        }
-
-        return errors;
+        // backpropagate the previous layer
+        this->prev->backPropagate(Eigen::VectorXf(0, 0), learning_rate);
     }
 
 } // layers

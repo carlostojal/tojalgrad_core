@@ -23,6 +23,8 @@ namespace tojalgrad::nn::layers {
             int n_inputs = 0;
             /*! \brief Number of neurons on this layer. */
             int n_neurons = 0;
+            /*! \brief Last input vector. */
+            Eigen::VectorXf lastInput;
 
         public:
             /*! \brief Class constructor.
@@ -41,7 +43,10 @@ namespace tojalgrad::nn::layers {
             Eigen::VectorXf forward(Eigen::VectorXf in) override;
 
             /*! \brief Compute the error of this layer. */
-            Eigen::VectorXf backPropagate() override;
+            void backPropagate(const Eigen::VectorXf& out, float learning_rate) override;
+
+            Dense *next = nullptr;
+            Dense *prev = nullptr;
 
     };
 } // layers
